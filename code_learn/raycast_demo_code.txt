@@ -1,0 +1,22 @@
+local Origin = script.Parent
+local End = world.End
+local Light = Origin.Light
+
+local RED = Color(255,0,0,255)
+local BLUE = Color(0,0,255,255)
+
+local res
+
+function Update()
+	res = Physics:Raycast(Origin.Position, End.Position, true)
+	if res:HasHit() and res:GetHitObj() == localPlayer then
+		Light.Color = RED
+	else
+		Light.Color = BLUE
+	end
+end
+world.OnRenderStepped:Connect(Update)
+
+script.OnDestroyed:Connect(function()
+	world.OnRenderStepped:Disconnect(Update)
+end)
