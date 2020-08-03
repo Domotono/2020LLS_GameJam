@@ -1,0 +1,64 @@
+local GizmoModule = {}
+	GizmoModule.__index = GizmoModule
+	function GizmoModule:Initial(Gizmo,Button,Type,Config,Func)
+		local self = setmetatable({},GizmoModule)
+		local NewGizmo = world:CreateInstance(Gizmo,Gizmo,localPlayer.Local.ConstraintFree,Vector3.Down*100)
+		self.Gizmo = NewGizmo:GetChildByIndex(1)
+		self.Button = Button
+		self.Type = Type
+		self.Config = Config
+		self.Func = Func
+		self.Yaw = 45
+		self.Gizmo.Out.Size = Vector2.One*Config.Length*500
+		self.Gizmo.Out.Angle = Type<=3 and self.Yaw  or -self.Yaw 
+		--选区域类摇杆
+		if Type==2 then
+			self.Gizmo.Out.In.Size = Vector2.One*Config.Length*500
+			self.Gizmo.Out.In.FillAmount = Config.Angle/360
+		--选方向类摇杆
+		elseif Type==3 then
+			self.Gizmo.Out.Mid.In.Size = Vector2(Config.Width*250,Config.Length*250)
+		--选面前扇形类摇杆
+		elseif Type==4 then
+			self.Gizmo.Out.In.Size = Vector2.One*Config.Radius*500
+			Button.Normalized = false
+		end
+		return self
+	end
+	
+	function GizmoModule:Binding()
+		local Button = self.Button
+		local Gizmo = self.Gizmo
+		local Type = self.Type
+		local Config = self.Config
+		local Func = self.Func
+		--开始拖拽摇杆时
+		Button.OnDragBegin:Connect(function()
+			Gizmo.Visible = true
+			Gizmo.Position = localPlayer.Position+Vector3.Up*0.2
+		end)
+		--拖拽摇杆过程中
+		Button.OnDragStay:Connect(function() 
+			Gizmo.Position = localPlayer.Position+Vector3.Up*0.2
+			if Type<=2 then
+				Gizmo.Rotation = EulerDegree(90,Button.DragAngle-Config.Angle/2,0)
+			elseif Type==3 then
+				Gizmo.Rotation = EulerDegree(90,Button.DragAngle,0)
+			else
+				Gizmo.Out.In.Offset = Vector3(Button.Vertical*-1,Button.Horizontal)*Config.Length*250
+			end
+		end)
+		--摇杆拖拽结束
+		Button.OnDragEnd:Connect(function(Value)
+			Gizmo.Visible = false
+			Gizmo.Position = Vector3.Down*100
+			local FValue = Value
+			if FValue==Vector2.Zero then
+				FValue=Vector2(0,1)
+			end
+			local Dir = Vector3(FValue.x,0,FValue.y):Rotate(Vector3.Up,-self.Yaw)
+			local Pos = localPlayer.Position+Vector3(Config.Length*Value.x,0,Config.Length*Value.y):Rotate(Vector3.Up,-self.Yaw)
+			Func(Dir,Pos)
+		end)
+	end
+return GizmoModule
