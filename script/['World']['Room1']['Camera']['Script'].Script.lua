@@ -2,7 +2,10 @@
 local Light = script.Parent.Camera2
 local Start = Light.Position 
 print(Start)
-local End = Light.Position + Vector3.Forward*5 - Vector3.Up*5
+
+local End = Light.Position 
+			+ Vector3.Forward*5
+			- Vector3.Up*5  -- 这个是射线终点和摄像头的Y轴上的相对位置（5）
 
 local RED = Color(255,0,0,255)
 local BLUE = Color(0,0,255,255)
