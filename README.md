@@ -10,6 +10,6 @@
 
 ## script
 
-![image-20200803224358761](C:\Users\ashww\AppData\Roaming\Typora\typora-user-images\image-20200803224358761.png)
+![image-20200803224358761](F:\lls\MyProject\LEARN\2020lls_gamejam\image-20200803224358761.png)
 
 debug中可以导入导出
