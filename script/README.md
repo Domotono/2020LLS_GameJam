@@ -8,7 +8,7 @@
 
 
 
-
+------
 
 ### Camera.Script
 
@@ -60,7 +60,7 @@ local Start = { script.Parent.Camera1.Position,
 
 
 
-
+------
 
 ### Camera.Angle.Script
 
@@ -90,7 +90,7 @@ end
 
 
 
-
+------
 
 ### IsOnAlert.ValueChangeEvent
 
