@@ -38,4 +38,4 @@ local oriVec = {Vector3(5,-5,0), --Camera1
 
 灯控制
 
-wait(灯亮时间)
+**wait(灯亮时间)**
