@@ -22,7 +22,7 @@ local oriVec = {Vector3(5,-5,0), --Camera1
 + Vector3(x,y,z) y值是射线终点和起点的相对高度
 + 另一个非零值是射线检测的长度（在水平面上的投影）
 
-![$TB_7]XL_FRUH24WM{`4Y@0](https://github.com/Domotono/2020LLS_GameJam/blob/master/code_learn/%24TB_7%5DXL_FRUH24WM%7B%604Y%400.png)
+![图片](https://github.com/Domotono/2020LLS_GameJam/blob/master/code_learn/%24TB_7%5DXL_FRUH24WM%7B%604Y%400.png)
 
 
 
