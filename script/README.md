@@ -6,6 +6,10 @@
 
 
 
+
+
+
+
 ### Camera.Script
 
 每帧执行，构造monitor射线检测
@@ -28,11 +32,61 @@ local oriVec = {Vector3(5,-5,0), --Camera1
 
 
 
+
+
+要增加**carema**
+
+```
+--Camera1234的检测射线起点（相机位置为起点）
+local Start = { script.Parent.Camera1.Position,
+				script.Parent.Camera2.Position,
+				script.Parent.Camera3.Position,
+				script.Parent.Camera4.Position } 
+--构造射线
+	res1 = Physics:Raycast(Start[1] , getEndPosition(1) , true)
+	res2 = Physics:Raycast(Start[2] , getEndPosition(2) , true)
+	res3 = Physics:Raycast(Start[3] , getEndPosition(3) , true)
+	res4 = Physics:Raycast(Start[4] , getEndPosition(4) , true)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Camera.Angle.Script
 
 旋转角度控制
 
 **wait(角速度)**
+
+**角度上下限**
+
+```
+if i == 0 then  --0
+	flag = 1 
+end
+		
+if i == 180 then  --180
+	flag = -1 
+end
+```
+
+
+
+
+
+
+
+
 
 
 
@@ -43,3 +97,13 @@ local oriVec = {Vector3(5,-5,0), --Camera1
 灯控制
 
 **wait(灯亮时间)**
+
+**灯颜色**
+
+```
+local RED = Color(255,0,0,255)
+local BLUE = Color(0,0,255,255)
+
+script.Parent.Parent.SpotLight.SpotLight1.Color=
+```
+
