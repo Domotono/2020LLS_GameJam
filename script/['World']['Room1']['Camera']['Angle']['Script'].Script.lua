@@ -1,4 +1,4 @@
-print("Hello world!")
+--print("Hello world!")
 
 local i = 0
 
@@ -9,7 +9,7 @@ do
 
 	--print(script.Parent.Value)
 	script.Parent.Value = i	
-	print(i)
+	--print(i)
 		if i == 0 then
 			flag = 1 
 		end
