@@ -4,11 +4,11 @@
 
 
 
+
+
 ### Camera.Script
 
 每帧执行，构造monitor射线检测
-
-
 
 **oriVec**
 
@@ -26,11 +26,15 @@ local oriVec = {Vector3(5,-5,0), --Camera1
 
 
 
+
+
 ### Camera.Angle.Script
 
 旋转角度控制
 
 **wait(角速度)**
+
+
 
 
 
