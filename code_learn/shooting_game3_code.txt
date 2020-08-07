@@ -1,0 +1,24 @@
+--射出实体子弹的射击模式
+--碰撞和生成
+function FireProjectile()
+	local dir, hitPosition = GetFireResult()
+	localPlayer:Attack()
+	local bullet = world:CreateInstance('Bullet', 'Bullet', world.Temp2, muzzle.Position)--弹药
+	world:CreateInstance('Blast', 'Blast', muzzle, muzzle.Position)--特效
+	world:CreateInstance('Fire', 'Fire', world.Temp1, muzzle.Position):Play()--声音
+	bullet.LinearVelocity = dir * 20
+	bullet.OnCollisionBegin:Connect(function(_, hitpoint)--弹药的碰撞
+		world:CreateInstance('Hit', 'Hit', world.Temp1, hitpoint)
+	end)
+end
+
+--左键射线射击模式，右键子弹射击模式 按键
+Input.OnKeyDown:Connect(function() --按键事件
+	if Input.GetPressKeyData(Enum.KeyCode.Mouse0) == 1 then
+		if timer <= 0 then
+			FireInstant()
+		end
+	elseif Input.GetPressKeyData(Enum.KeyCode.Mouse1) == 1 then
+		FireProjectile()
+	end
+end
