@@ -107,3 +107,27 @@ local BLUE = Color(0,0,255,255)
 script.Parent.Parent.SpotLight.SpotLight1.Color=
 ```
 
+------
+
+### SuspScript
+
+复制目标（悬浮）：把这个脚本复制到这个Obj下面
+
+悬浮高度  height
+
+悬浮持续时间 suspendTime
+
+```
+local height = 1.5 
+local suspendTime = 5 
+```
+
+上下过程 时间wait(每次变化的时间)
+```
+	for i = 0 , height , 0.1 do 
+		--print("上"..i)
+		Obj.Position = Obj.Position + Vector3.Up * 0.1
+		wait(0.05)--改这边大小 越大越慢
+	end
+```
+
