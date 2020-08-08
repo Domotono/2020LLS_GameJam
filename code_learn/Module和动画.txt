@@ -1,0 +1,87 @@
+local Mount = {}
+
+	local ForwardKey = Enum.KeyCode.W
+	local BackKey = Enum.KeyCode.S
+	local LeftKey = Enum.KeyCode.A
+	local RightKey = Enum.KeyCode.D
+	local MoveForward = 0
+	local MoveBack = 0
+	local MoveLeft = 0
+	local MoveRight = 0
+	
+
+	function GetMovement()
+		MoveForward = Input.GetPressKeyData(ForwardKey)>0 and 1 or 0
+		MoveBack = Input.GetPressKeyData(BackKey)>0 and -1 or 0
+		MoveLeft = Input.GetPressKeyData(LeftKey)>0 and 1 or 0
+		MoveRight = Input.GetPressKeyData(RightKey)>0 and -1 or 0
+	end
+	
+	--用tween模拟马的移动动作
+	function Mount:Init(horse,player)
+		self.Horse = horse
+		self.Player = player
+		world.CurrentCamera.CameraMode = Enum.CameraMode.Social
+		world.CurrentCamera.Offset = Vector3(1,1.5,0)
+		self.Tweeners1 = {}
+		self.Tweeners2 = {}
+		self.Begin = false
+		for i=1,6 do
+			local Tweener = Tween:TweenProperty(world.Horse1:GetChild('Cube'..i),{LocalRotation = world.Horse2:GetChild('Cube'..i).LocalRotation},0.3,1)
+			table.insert(self.Tweeners1,Tweener)
+		end
+		for i=1,6 do
+			local Tweener = Tween:TweenProperty(world.Horse1:GetChild('Cube'..i),{LocalRotation = world.Horse3:GetChild('Cube'..i).LocalRotation},0.3,1)
+			table.insert(self.Tweeners2,Tweener)
+		end
+		for i=1,6 do
+			self.Tweeners1[i].OnComplete:Connect(function()
+				self.Tweeners2[i]:Play()
+			end)	
+		end
+		for i=1,6 do
+			self.Tweeners2[i].OnComplete:Connect(function()
+				self.Tweeners1[i]:Play()
+			end)	
+		end
+	end
+	
+	function Mount:Move(delta)
+		GetMovement()
+	--	local Forward = self.Player.Forward
+		local Forward = world.CurrentCamera.Forward
+		Forward.y=0
+		local Right = Vector3(0,1,0):Cross(Forward)
+		Dir = Forward*(MoveForward+MoveBack)-Right*(MoveLeft+MoveRight)		
+		if Dir.Magnitude>0 then
+			if not self.Begin then		
+				for i=1,6 do
+					self.Tweeners1[i]:Play()
+					self.Tweeners1[i].OnComplete:Connect(function()
+						self.Tweeners2[i]:Play()
+					end)			
+					self.Tweeners2[i].OnComplete:Connect(function()
+						self.Tweeners1[i]:Play()
+					end)	
+											
+					self.Begin = true
+				end
+			end
+			self.Horse.Position = self.Horse.Position + Dir.Normalized*delta*10
+			self.Horse.Left = Vector3.Slerp(self.Horse.Left,Dir,delta)
+		else
+			for i=1,6 do
+				self.Tweeners1[i].OnComplete:Clear()
+				self.Tweeners2[i].OnComplete:Clear()
+			end	
+			self.Begin = false
+		end
+	end
+	
+	function Mount:Leave()
+		for i=1,6 do
+			self.Tweeners1[i].OnComplete:Clear()
+			self.Tweeners2[i].OnComplete:Clear()
+		end			
+	end
+return Mount
