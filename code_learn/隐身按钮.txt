@@ -1,0 +1,34 @@
+----说明：角色触碰此组件后，弹出一个点击提示，点击后，显示爆炸特效----
+
+----可调节参数----
+
+
+----逻辑----
+local Obj = script.Parent
+
+Obj.OnCollisionBegin:Connect(function(HitObject)
+
+	if HitObject.ClassName == 'PlayerInstance' then	 --判断是否碰撞玩家
+		Obj.SurfaceGUI.Button:SetActive(true)	--展示按钮
+	end
+
+end)
+
+Obj.OnCollisionEnd:Connect(function(HitObject)	--玩家不再触碰时
+
+	if HitObject:IsA('PlayerInstance')then	--判断是否碰撞玩家
+		Obj.SurfaceGUI.Button:SetActive(false)	--隐藏按钮
+	end
+
+end)
+
+
+--点击按钮后执行的逻辑
+function Fire()
+	Obj.Explosion:SetActive(true)
+	wait(0.5)
+	Obj.Explosion:SetActive(false)
+end
+
+Obj.SurfaceGUI.Button.OnClick:Connect(Fire)
+

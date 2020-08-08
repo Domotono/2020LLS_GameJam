@@ -81,9 +81,8 @@ end
 function redLight()
 
 		--Light.Color = RED
-		script.Parent.Parent.IsOnAlert.Value = true
-		
-		print("*****************************")
+		script.Parent.Parent.IsOnAlert.Value = true		
+		print("嗨，老兄弟，你被观察到了（翻译腔）")
 		
 end
 
