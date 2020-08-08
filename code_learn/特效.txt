@@ -1,0 +1,37 @@
+----说明：角色触碰此组件后，身体上燃烧2秒----
+----注意：此功能需要在Archetype里创建一个对应燃烧原型方可使用----
+
+
+----可调节参数----
+local BuffTime = 2 --持续时间
+
+----逻辑----
+local Obj = script.Parent
+local TimeLeft = 0 --初始化时间
+local OnFire = false	--记录是否已经着火
+
+Obj.OnCollisionBegin:Connect(function(HitObject)
+
+	if HitObject:IsA('PlayerInstance') then	--判断是否碰撞玩家
+		if OnFire == false then	--判断是是否着火
+			local Pos = Vector3(HitObject.Position.x,HitObject.Position.y + 1,HitObject.Position.z) --特效生成的位置
+			Effect = world:CreateInstance('Fire','FireEffect',HitObject,Pos,EulerDegree.Zero)	--创建特效
+			--'Fire'特效原型在Archetype目录底下，也可使用此方法创建其他特效
+		end
+		TimeLeft = BuffTime
+		OnFire = true
+	end
+
+end)
+
+----每0.1秒执行的逻辑----
+while wait(0.1) do 
+
+if TimeLeft > 0 then
+	TimeLeft = TimeLeft - 0.1 --控制Buff时间
+elseif TimeLeft <= 0 and Effect~= nil then	--Buff时间到且正在着火
+	Effect:Destroy()	--删除特效
+	OnFire = false
+end
+
+end

@@ -1,0 +1,27 @@
+----说明：角色触碰此组件后，换一个外型----
+
+----可调节参数----
+--6个string代表6件衣服
+local ClothesTable = {'Male_001Jacket','Male_NutJacket','Male_OwlJacket','Male_009Jacket','Male_BaseballJacket','Male_007Jacket'}
+--6条裤子
+local TrousersTable = {'Male_007Trousers','Male_012Pants','Male_Zombies01Pants','Male_003Trousers','Male_009Trousers','Male_010Trousers'}
+--6种头盔
+local HatTable = {'Male_010Hat','Male_MexicHat','Male_Zombies01Hat','Male_008Hat','Male_012Hat','Male_011Hat'}
+
+----逻辑----
+local Obj = script.Parent
+
+Obj.OnCollisionBegin:Connect(function(HitObject)
+
+	if HitObject:IsA('PlayerInstance')then	--判断是否碰撞玩家
+		--生成3个随机数
+		local numC = math.random(1,6)
+		local numT = math.random(1,6)
+		local numH = math.random(1,6)
+		--换装
+		HitObject.Avatar.Clothes = ClothesTable[numC]
+		HitObject.Avatar.Trousers = TrousersTable[numT]
+		HitObject.Avatar.HeadAccessory = HatTable[numH]
+	end
+
+end)

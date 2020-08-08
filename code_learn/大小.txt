@@ -1,0 +1,58 @@
+----说明：角色触碰此组件后，组件大小改变----
+
+----可调节参数----
+local SizeScale = 1.2
+
+----逻辑----
+local Obj = script.Parent
+Obj.OnCollisionBegin:Connect(function(HitObject)
+
+	if HitObject:IsA('PlayerInstance')then	--判断是否碰撞玩家
+		Obj.Size = Vector3(Obj.Size.x*SizeScale,Obj.Size.y*SizeScale,Obj.Size.z*SizeScale)
+	end
+
+end)
+
+----说明：角色触碰此组件后，身体缩小10%----
+
+----可调节参数----
+local Scale = 0.9	--缩小的倍数
+
+
+----逻辑----
+local Obj = script.Parent
+Obj.OnCollisionBegin:Connect(function(HitObject)
+
+	if HitObject:IsA('PlayerInstance')then	--判断是否碰撞玩家
+		
+		--体型改变
+		HitObject.CharacterWidth = HitObject.CharacterWidth*Scale
+		HitObject.CharacterHeight = HitObject.CharacterHeight*Scale
+		HitObject.Avatar.HeadSize = HitObject.Avatar.HeadSize*Scale
+		HitObject.Avatar.Width = HitObject.Avatar.Width*Scale
+		HitObject.Avatar.Height = HitObject.Avatar.Height*Scale
+	end
+
+end)
+
+----说明：角色触碰此组件后，身体放大10%----
+
+----可调节参数----
+local Scale = 1.1	--放大的倍数
+
+
+----逻辑----
+local Obj = script.Parent
+Obj.OnCollisionBegin:Connect(function(HitObject)
+
+	if HitObject:IsA('PlayerInstance')then	--判断是否碰撞玩家
+		
+		--体型改变
+		HitObject.CharacterWidth = HitObject.CharacterWidth*Scale
+		HitObject.CharacterHeight = HitObject.CharacterHeight*Scale
+		HitObject.Avatar.HeadSize = HitObject.Avatar.HeadSize*Scale
+		HitObject.Avatar.Width = HitObject.Avatar.Width*Scale
+		HitObject.Avatar.Height = HitObject.Avatar.Height*Scale
+	end
+
+end)
