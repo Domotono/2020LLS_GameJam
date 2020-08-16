@@ -12,7 +12,8 @@ Obj.OnCollisionBegin:Connect(function(HitObject)--玩家触碰时
 
 	
 	
-	if HitObject:IsA('PlayerInstance')then	--判断是否碰撞玩家
+	if HitObject== localPlayer and Obj.InSight.Value == false 
+	then	--判断是否碰撞玩家
 		
 		--UI展示（发亮）
 		print("请摁1悬浮")
@@ -27,7 +28,7 @@ Obj.OnCollisionBegin:Connect(function(HitObject)--玩家触碰时
 end)
 Obj.OnCollisionEnd:Connect(function(HitObject)	--玩家不再触碰时
 
-	if HitObject:IsA('PlayerInstance')then	--判断是否碰撞玩家
+	if HitObject== localPlaye then	--判断是否碰撞玩家
 		isOnColl = false
 		--print(isOnColl)
 	end
@@ -38,7 +39,7 @@ end)
 Input.OnKeyDown:Connect(function() --按键事件
 	--print("有了")
 	--print(Input.GetPressKeyData(Enum.KeyCode.One))
-	if Input.GetPressKeyData(Enum.KeyCode.One) == 1 and isOnColl == true 
+	if Input.GetPressKeyData(Enum.KeyCode.One) == 1 and isOnColl == true and Obj.InSight.Value == false
 	then
 				
 		print("有1了")
@@ -77,4 +78,5 @@ function suspend() --响应事件
 	end
 	Obj.IsStatic = flag
 end
+
 
