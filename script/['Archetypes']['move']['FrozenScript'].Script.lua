@@ -36,16 +36,20 @@ Input.OnKeyDown:Connect(function() --按键事件
 	if Input.GetPressKeyData(Enum.KeyCode.Three) == 1 and isOnColl == true  and Obj.InSight.Value == false
 	then			
 		print("有3了")
-		if world.AbilityValue3.Value - 30 >= 0 
+		if world.AbilityValue.Value - 30 >= 0 
 		then 
-			world.AbilityValue3.Value = world.AbilityValue3.Value - 30
+			world.AbilityValue.Value = world.AbilityValue.Value - 30
 			--Obj.IsStatic = false  --触发响应事件
 			Obj.Deceleration = 10
-			--Obj.NPCState.Value = 0
+			local Pos = Vector3(Obj.Position.x,Obj.Position.y-2 ,Obj.Position.z) --特效生成的位置
+			local Eff = world:CreateInstance('Frozen','FrozenEffect',Obj,Pos,EulerDegree.Zero)	--创建特效
+			Obj.NPCState.Value = 0
+			Eff.Scale = 2
 			wait(Ftime)
 			Obj.Deceleration = 5000
+			Eff:Destroy()
 		else
-			print("3能量不足！！！！")
+			print("能量不足！！！！")
 		end
 	end
 	

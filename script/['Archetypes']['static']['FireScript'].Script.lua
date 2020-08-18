@@ -43,11 +43,11 @@ Input.OnKeyDown:Connect(function() --按键事件
 	if Input.GetPressKeyData(Enum.KeyCode.Four) == 1 and isOnColl == true  and OnFire == false
 	then			
 		print("有4了")
-		if world.AbilityValue3.Value - 30 >= 0 
+		if world.AbilityValue.Value - 30 >= 0 
 		then 
-			world.AbilityValue3.Value = world.AbilityValue3.Value - 30
+			world.AbilityValue.Value = world.AbilityValue.Value - 30
 			--触发响应事件
-			local Pos = Vector3(Obj.Position.x,Obj.Position.y + 1 ,Obj.Position.z) --特效生成的位置
+			local Pos = Vector3(Obj.Position.x,Obj.Position.y  ,Obj.Position.z) --特效生成的位置
 			Effect = world:CreateInstance('smoke','smokeEffect',Obj,Pos,EulerDegree.Zero)	--创建特效
 			TimeLeft = BuffTime
 			OnFire = true
@@ -56,7 +56,7 @@ Input.OnKeyDown:Connect(function() --按键事件
 			NPC.WalkSpeed = NPC.WalkSpeed * mul
 			
 		else
-			print("3能量不足！！！！")
+			print("能量不足！！！！")
 		end
 	end
 	

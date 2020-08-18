@@ -44,12 +44,12 @@ Input.OnKeyDown:Connect(function() --按键事件
 		print("有1了")
 		
 		--判断能量
-		if world.AbilityValue1.Value - 20 >= 0 
+		if world.AbilityValue.Value - 20 >= 0 
 		then 
-			world.AbilityValue1.Value = world.AbilityValue1.Value - 20
+			world.AbilityValue.Value = world.AbilityValue.Value - 20
 			suspend()  --触发响应事件
 		else
-			print("1能量不足！！！！")
+			print("能量不足！！！！")
 		end
 		
 				

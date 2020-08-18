@@ -22,7 +22,7 @@ NPC.OnCollisionStay:Connect(function(HitObject)
 	--HitObject~=world.BaseFloor and--不是地板
 	HitObject.Name ~= BaseFloor
 	then
-		print("----------------------")
+		--print("----------------------")
 		flag = true
 	end
 	
