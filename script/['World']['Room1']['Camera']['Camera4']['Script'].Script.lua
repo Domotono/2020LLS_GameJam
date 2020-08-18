@@ -1,14 +1,18 @@
 local Camera = script.Parent
              -------------水平长         竖直高           
-local oriVec = Camera.Left*5 + Vector3(0,-5,0)
+local oriVec = Camera.Left*10 + Vector3(0,-10,0)
 local canSee = true
+local r = 1  --哪个房间
+
+
 local newVec
 local angle = 0 
 local inSight = false
 local pos
 
-local NPC = Camera.Parent.Parent.NPCs:GetChildren()
---print(table.unpack(NPC))
+local Room = world:GetChild("Room"..r)
+local NPC = Room.NPCs:GetChildren()
+print(table.unpack(NPC))
 
 function Update()
 	
@@ -26,7 +30,7 @@ function Update()
 		pos = res1:GetHitPos()
 		setNpc(pos)
 		inSight = true
-		print("嗨，老兄弟，你被观察到了（翻译腔）")
+		--print("嗨，老兄弟，你被观察到了（翻译腔）")
 	end
 	
 	if ( res2:HasHit() and res2:GetHitObj() == localPlayer ) 
@@ -34,7 +38,7 @@ function Update()
 		pos = res2:GetHitPos()
 		setNpc(pos)
 		inSight = true
-		print("嗨，老兄弟，你被观察到了（翻译腔）")
+		--print("嗨，老兄弟，你被观察到了（翻译腔）")
 	end
 	
 	if ( res3:HasHit() and res3:GetHitObj() == localPlayer ) 
@@ -42,7 +46,7 @@ function Update()
 		pos = res3:GetHitPos()
 		setNpc(pos)
 		inSight = true
-		print("嗨，老兄弟，你被观察到了（翻译腔）")
+		--print("嗨，老兄弟，你被观察到了（翻译腔）")
 	end
 	
 	if ( res4:HasHit() and res4:GetHitObj() == localPlayer ) 
@@ -50,7 +54,7 @@ function Update()
 		pos = res4:GetHitPos()
 		setNpc(pos)
 		inSight = true
-		print("嗨，老兄弟，你被观察到了（翻译腔）")
+		--print("嗨，老兄弟，你被观察到了（翻译腔）")
 	end
 	
 	inSight = false
@@ -88,7 +92,7 @@ function setNpc(P)
 	
 	for _,v in pairs(NPC) do
 		v.NPCState.Value = 2
-		v.GoPoint.Value = pos
+		v.GoPoint.Value = P
 		--print("2")
 	end
 

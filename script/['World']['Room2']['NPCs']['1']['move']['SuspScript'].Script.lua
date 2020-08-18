@@ -12,8 +12,7 @@ Obj.OnCollisionBegin:Connect(function(HitObject)--玩家触碰时
 
 	
 	
-	if HitObject== localPlayer and Obj.InSight.Value == false 
-	then	--判断是否碰撞玩家
+	if HitObject== localPlayer and Obj.InSight.Value == false then	--判断是否碰撞玩家
 		
 		--UI展示（发亮）
 		print("请摁1悬浮")
@@ -28,7 +27,7 @@ Obj.OnCollisionBegin:Connect(function(HitObject)--玩家触碰时
 end)
 Obj.OnCollisionEnd:Connect(function(HitObject)	--玩家不再触碰时
 
-	if HitObject== localPlaye then	--判断是否碰撞玩家
+	if HitObject== localPlayer then	--判断是否碰撞玩家
 		isOnColl = false
 		--print(isOnColl)
 	end

@@ -7,14 +7,14 @@ local mul = 0.5 --速度变化
 
 local TimeLeft = 0 --初始化时间
 local OnFire = false	--记录是否已经着火
-local NPC = Obj.Parent.Parent.NPCs:GetChildren()
+local NPC = Obj.Parent:GetChildren()
 
-Obj.OnCollisionBegin:Connect(function(HitObject)	--玩家触碰时
+Obj.OnCollisionBegin:Connect(function(HitObject)--玩家触碰时
 
 	
 	
-	if HitObject:IsA('PlayerInstance')	--判断是否碰撞玩家
-		and  Obj.IsStatic == true
+	if HitObject== localPlayer and Obj.InSight.Value == false	--判断是否碰撞玩家
+		--and  Obj.IsStatic == true
 	then	
 		--UI展示（发亮）
 		print("请摁4放火")
@@ -29,7 +29,7 @@ Obj.OnCollisionBegin:Connect(function(HitObject)	--玩家触碰时
 end)
 Obj.OnCollisionEnd:Connect(function(HitObject)	--玩家不再触碰时
 
-	if HitObject:IsA('PlayerInstance')then	--判断是否碰撞玩家
+	if HitObject== localPlayer then	--判断是否碰撞玩家
 		isOnColl = false
 		--print(isOnColl)
 	end
@@ -52,7 +52,7 @@ Input.OnKeyDown:Connect(function() --按键事件
 			TimeLeft = BuffTime
 			OnFire = true
 			
-			setNpc(P)--被追击
+			setNpc(Obj.Position)--被追击
 			NPC.WalkSpeed = NPC.WalkSpeed * mul
 			
 		else
@@ -66,7 +66,7 @@ function setNpc(P)
 	
 	for _,v in pairs(NPC) do
 		v.NPCState.Value = 2
-		v.GoPoint.Value = pos
+		v.GoPoint.Value = P
 		--print("2")
 	end
 
@@ -81,8 +81,8 @@ elseif TimeLeft <= 0 and Effect~= nil then	--Buff时间到且正在着火
 	OnFire = false
 	local Eff = world:CreateInstance('blast','blastEffect',Obj,Obj.Position,EulerDegree.Zero)	--创建特效
 	local Collis = world:CreateInstance('Torus','TorusCollis',Obj,Obj.Position,EulerDegree.Zero)
-	wait(1)
-	Eff:Destroy()
+	wait(0.3)
+	--Eff:Destroy()
 	Obj:Destroy()
 end
 	

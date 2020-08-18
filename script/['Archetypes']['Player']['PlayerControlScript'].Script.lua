@@ -9,8 +9,8 @@ local rightDir = Vector3.Right
 local finalDir = Vector3.Zero
 local horizontal = 0
 local vertical = 0
-local energy = player.Local.ControlGUI.energytank.energyvalue.Value
-local tanksize = player.Local.ControlGUI.energytank.energy
+--local energy = player.Local.ControlGUI.energytank.energyvalue.Value
+--local tanksize = player.Local.ControlGUI.energytank.energy
 
 
 -- 摄像机看向自己
@@ -199,14 +199,35 @@ function recover()
   localPlayer.NameGUI:SetActive(true)
 end
 Input.OnKeyDown:Connect(function()
-	if Input.GetPressKeyData(Small_KEY) == 1 and not isDead and energy>40 and player.Local.ControlGUI.s4.ActiveSelf== true then
-		energy = energy - 40
-		print(energy)
-		tanksize.Size = Vector2(energy*4,80)
-		besamll()	--变小
-		wait(15)
-		recover()	--恢复原状
+	if Input.GetPressKeyData(Small_KEY) == 1 and not isDead  
+	then
+		if world.AbilityValue4.Value >= 40
+		then 
+		
+			world.AbilityValue4.Value = world.AbilityValue4.Value - 40
+			--print(energy)
+			--tanksize.Size = Vector2(energy*4,80)
+			besamll()	--变小
+			wait(15)
+			recover()	--恢复原状
+			
+		else
+			print("4能量不足！！！")  --主要是为了打印这个
+		end
 	end
 end)
-
+-- 外挂满能量
+Input.OnKeyDown:Connect(function()
+     if Input.GetPressKeyData(Enum.KeyCode.M) == 1 and not isDead
+	then
+        world.AbilityValue1.Value = 1000
+		print("获得能量一1000点")	
+		world.AbilityValue2.Value = 1000
+		print("获得能量二1000点")	
+		world.AbilityValue3.Value = 1000
+		print("获得能量三1000点")	
+		world.AbilityValue4.Value = 1000
+	    print("获得能量四1000点")	
+	end
+end)
 --复制的能量相关逻辑
