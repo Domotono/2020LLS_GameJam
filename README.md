@@ -1,13 +1,12 @@
-# 2020lls_gamejam
+# 2020lls_gamejam备份
+
+策划程序@周俊文
+
+美术@魏鑫蓬
+
+程序@王文航
+
+文案程序@韦宛霏
 
 
 
-## code_learn
-
-从教学smap里面扒下来的script，学习用
-
-
-
-## script
-
-debug中可以导入导出

@@ -44,7 +44,7 @@ end)
 Input.OnKeyDown:Connect(function() --按键事件
 	
 	
-	if Input.GetPressKeyData(Enum.KeyCode.Four) == 1 and isOnColl == true  and OnFire == false
+	if Input.GetPressKeyData(Enum.KeyCode.Four) == 1 and isOnColl == true  and OnFire == false and world.S4.Value == 50
 	then			
 		print("有4了")
 		if world.AbilityValue.Value - 30 >= 0 
